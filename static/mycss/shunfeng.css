@@ -1,0 +1,24 @@
+@charset "GB2312";
+/*Ë³·á´òÓ¡ÑùÊ½*/
+
+.st_font_family_heiti{font-family:"SimHei", "Microsoft YaHei", "WenQuanYi Micro Hei", 'sans-serif';}
+.st_font_family_arial{font-family:Arial;}
+
+
+.st_container{border: 1px solid #6F6D6D;width: 100mm;height: 150mm;overflow: hidden;}
+.st_content{border: 1px solid #B9B8B9;height: 144mm;width: 94mm;margin: 3mm}
+.st_border_top{border-top:1px solid #444142;}
+.st_border_bottom{border-bottom:1px solid #444142;}
+.st_border_right{border-right:1px solid #444142;}
+.st_border_left{border-left:1px solid #444142;}
+.st_border_top_bottom{border-bottom:1px solid #444142;border-top:1px solid #444142;}
+.st_border_top_bottom_gray{border-top: 1px solid #B9B8B9;border-bottom: 1px solid #444142}
+.display_inblock{display: inline-block;}
+.display_block{display:block;}
+
+.st_container span{margin: 0;padding: 0}
+.st_font_6pt{font-size: 6pt;}
+.st_font_10pt{font-size: 8pt;}
+.st_font_24pt{font-size: 24pt;}
+.st_font_36pt{font-size: 36pt;}
+.st_font_48pt{font-size: 48pt;}

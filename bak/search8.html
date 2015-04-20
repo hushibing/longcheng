@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <title>商城订单报表</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" >
+    <!--bootstrap-->
+    <link href="style/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <script src="style/bootstrap/js/jquery.min.js"></script>
+    <!--<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>-->
+    <script src="style/bootstrap/js/bootstrap.js"></script>
+    <!--datetimpker-->
+    <link href="style/bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <script src="style/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+    <!--highcharts js-->
+    <script src="js/highcharts.js"></script>
+    <script src="js/modules/exporting.js"></script>
+    <!--自定义Css-->
+    <link href="common/css/mycss.css" type="text/css" rel="stylesheet"/>
+    <!--按钮加载样式-->
+    <link href="common/plugin/ladda/ladda-themeless.min.css" rel="stylesheet">
+
+</head>
+<body data-spy="scroll" data-target="#myScrollspy">
+
+    <div class="container">
+        <!--商城订单报表-->
+        <div class="row"> <!--container-start-->
+            <div class="col-md-12" id="search_form">
+                <h3 class="text-center text-info">商城订单数据分析</h3><br>
+                <form class="form-inline" role="form">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">开始日期</div>
+                            <input type="text" class="form-control form_datetime" id="date_start" placeholder="日期选择">
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-addon">结束日期</div>
+                            <input type="text" class="form-control form_datetime" id="date_end" placeholder="日期选择">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="inputfile">商城平台选择</label>
+                        <select type="text" class="form-control" style="width: 160px;" id="inputfile" placeholder="商城平台选择">
+                            <option>招 商</option>
+                            <option>建 行</option>
+                            <option>民 生</option>
+                            <option>善 融</option>
+                            <option>淘 宝</option>
+                            <option>邮 乐</option>
+                            <option>一卡通</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" style="margin-left: 16px;">
+                        <button id="search_button" type="submit" class="btn btn-info ladda-button" data-style="expand-left" >
+                            <span class="ladda-label"> 查 询</span>
+                        </button>
+                    </div>
+                    <div class="form-group" style="margin-left: 16px">
+                        <button type="submit" class="btn btn-default">今 日</button>
+                        <button type="submit" class="btn btn-default">本 周</button>
+                        <button type="submit" class="btn btn-default">本 月</button>
+                    </div>
+                </form>
+            </div>
+        </div> <!--container-end-->
+        <!--商城订单报表-->
+        <br/>
+
+        <div class="row">
+            <!--订单数据总量分析-->
+            <div class="col-md-12" >
+                <div class="panel panel-info">
+                    <div class="panel-heading" id="order_all">订单总量数据分析</div>
+                    <div class="panel-body">
+                        <div class="col-md-6">
+                            <h4>
+                                订单总量数据: 152
+                                <button type="button" class="btn btn-sm btn-info" id="order_all" title="各平台订单详情" data-content="建行：<br>招商：<br>">
+                                    订单数量详情
+                                </button>
+                            </h4>
+
+                            <div id="containers" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+                        </div>
+                        <div class="col-md-6">
+                    <h4>订单数量详情</h4>
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <th>排序</th>
+                            <th>平台</th>
+                            <th>数量</th>
+                            <th>订单占比率</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>招商</td>
+                            <td>500</td>
+                            <td>43%</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>建行</td>
+                            <td>500</td>
+                            <td>43%</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>善融</td>
+                            <td>500</td>
+                            <td>43%</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>民生</td>
+                            <td>500</td>
+                            <td>43%</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>淘宝</td>
+                            <td>500</td>
+                            <td>43%</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>邮乐</td>
+                            <td>500</td>
+                            <td>43%</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>一卡通</td>
+                            <td>500</td>
+                            <td>43%</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-right">合计：</td>
+                            <td colspan="2"> 1526355</td>
+                        </tr>
+                    </table>
+                </div>
+                    </div> <!--panel-body-end -->
+                </div> <!--panel-end-->
+            </div>
+            <!--订单数据总量分析-->
+
+            <!--发货订单数据分析-->
+            <div class="col-md-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading" id="order_send" >发货订单数据分析</div>
+                    <div class="panel-body">
+                        <div class="col-md-6">
+                            <h4 class="text-info">发货订单数据总量:15265</h4>
+                            <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>发货订单数量详情</h4>
+                            <table class="table table-bordered table-striped">
+                                <tr>
+                                    <th>排序</th>
+                                    <th>平台</th>
+                                    <th>数量</th>
+                                    <th>发货占比率</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>招商</td>
+                                    <td>500</td>
+                                    <td>30%</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>建行</td>
+                                    <td>500</td>
+                                    <td>30%</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>善融</td>
+                                    <td>500</td>
+                                    <td>30%</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>民生</td>
+                                    <td>500</td>
+                                    <td>30%</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>淘宝</td>
+                                    <td>500</td>
+                                    <td>30%</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>邮乐</td>
+                                    <td>500</td>
+                                    <td>30%</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>一卡通</td>
+                                    <td>500</td>
+                                    <td>30%</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-right">合计：</td>
+                                    <td colspan="2"> 1526355</td>
+                                </tr>
+                            </table>
+                            <div>
+                                <span class="text-info" title="发货总数 / 订单总数"  id="order_send_percent"> 发货率 ：</span>   95%
+                            </div>
+                        </div>
+                    </div><!--panel-body-end-->
+                </div><!--panel-end-->
+            </div><!--col-md-12-end -->
+            <!--发货订单数据分析-->
+
+            <!--退货订单数据分析-->
+            <div class="col-md-12" >
+                <div class="panel panel-info">
+                    <div class="panel-heading" id="order_back"> 退货订单数据分析 </div>
+                    <div class="panel-body">
+                        <div class="col-md-6">
+                            <h4 class="text-info">退货订单数据总量:15265</h4>
+                            <div id="container_back" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table table-bordered table-striped">
+                                <tr>
+                                    <th>排序</th>
+                                    <th>平台</th>
+                                    <th>数量</th>
+                                    <th>退单率</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>招商</td>
+                                    <td>500</td>
+                                    <td>2%</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>建行</td>
+                                    <td>500</td>
+                                    <td>2%</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>善融</td>
+                                    <td>500</td>
+                                    <td>2%</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>民生</td>
+                                    <td>500</td>
+                                    <td>2%</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>淘宝</td>
+                                    <td>500</td>
+                                    <td>2%</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>邮乐</td>
+                                    <td>500</td>
+                                    <td>2%</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>一卡通</td>
+                                    <td>500</td>
+                                    <td>2%</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-right">合计：</td>
+                                    <td colspan="2"> 1526355</td>
+                                </tr>
+                            </table>
+                            <span class="text-info" title="退单总数 / 订单总数"  id="order_back_percent"> 退单率 ：</span>   95%
+                        </div>
+                    </div> <!--panel-body-end -->
+                </div> <!--panel-end -->
+            </div>
+            <!--退货订单数据分析-->
+
+            <!--销售额数据统计分析-->
+            <div class="col-md-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading" id="order_money">销售额数据统计分析　　<span class="pull-right"> 单位：元</span></div>
+                    <div class="panel-body">
+                        <div class="col-md-6">
+                            <h5 class="text-info">销售额数据统计分析</h5>
+                            <table class="table table-responsive table-bordered table-striped">
+                                <tr>
+                                    <th>排序</th>
+                                    <th>平台</th>
+                                    <th>金额</th>
+                                    <th>占比</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>建行</td>
+                                    <td>15000</td>
+                                    <td>26%</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>建行</td>
+                                    <td>15000</td>
+                                    <td>26%</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>建行</td>
+                                    <td>15000</td>
+                                    <td>26%</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>建行</td>
+                                    <td>15000</td>
+                                    <td>26%</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>建行</td>
+                                    <td>15000</td>
+                                    <td>26%</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-right">合计：</td>
+                                    <td colspan="2">222222</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="text-info">发货订单销售额数据统计分析</h5>
+                            <table class="table table-responsive table-bordered table-striped">
+                                <tr>
+                                    <th>排序</th>
+                                    <th>平台</th>
+                                    <th>金额</th>
+                                    <th>占比</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>建行</td>
+                                    <td>15000</td>
+                                    <td>26%</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>建行</td>
+                                    <td>15000</td>
+                                    <td>26%</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>建行</td>
+                                    <td>15000</td>
+                                    <td>26%</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>建行</td>
+                                    <td>15000</td>
+                                    <td>26%</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>建行</td>
+                                    <td>15000</td>
+                                    <td>26%</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="text-right">合计：</td>
+                                    <td colspan="2">222222</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--销售额数据统计分析-->
+
+            <!--商品品类统计分析-->
+            <div class="col-md-12" >
+                <div class="panel panel-info">
+                    <div class="panel-heading" id="order_shops">发货商品品类详情分析</div>
+                        <div class="panel-body">
+                            <div class="col-md-6">
+                                <div id="order_categorie"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table table-bordered table-responsive table-striped">
+                                    <tr>
+                                        <th>排序</th>
+                                        <th>商品品类名称</th>
+                                        <th>订单数量</th>
+                                        <th>各平台数量</th>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>苹果Apple</td>
+                                        <td>256</td>
+                                        <td>建行 23，招商25</td>
+                                    </tr>
+                                    <tr>
+                                        <td>合计：</td>
+                                        <td></td>
+                                        <td colspan="2"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <!--品类统计分析-->
+
+            <div id="test_bing" class="col-md-12" style="height: 300px;">
+
+            </div>
+            <div id="test_bing1" class="col-md-12" style="height: 300px;">
+
+            </div>
+
+
+        </div>
+    </div> <!--container end-->
+
+    <div id="myScrollspy" class="pull-right">
+        <ul class="nav nav-tabs nav-stacked" id="myNav">
+            <li class="active"><a href="#search_form">条件查询</a></li>
+            <li><a href="#order_all">订单总量数据</a></li>
+            <li><a href="#order_send">发货订单数据</a></li>
+            <li><a href="#order_back">退货订单数据</a></li>
+            <li><a href="#order_money">销售额数据统计</a></li>
+            <li><a href="#order_shops">发货商品品类</a></li>
+        </ul>
+    </div>
+</body>
+
+<!--图表插件js-->
+<script type="text/javascript" src="common/js/mycharts.js"></script>
+<script type="text/javascript">
+    $(".form_datetime").datetimepicker({
+        format: 'yyyy-mm-dd',
+        minView: "month",
+        autoclose: true,
+    });
+    $("#order_send_percent,#order_back_percent").tooltip({
+        placement:'bottom'
+    });
+    $("#myNav").affix({
+        offset: {
+            top: 0
+        }
+    });
+//  设置元素属性内容
+    $("#order_all").attr('data-content','');
+
+    $("#order_all").popover({html:true});
+    $("#order_all").popover("toggle");
+    $("#order_all").popover("hide");
+
+    $('#search_button').click(function(){
+        //$(this).button('loading');//执行等待状态切换操作
+        $(this).find('span.ladda-label').html('正在查询...');
+    })
+    $(function(){
+        //设置订单数据
+        chart_order_all.series[0].setData([['建行 500',   35.0],['招商 200',36.8],{name: '善融 362',y: 12.8,sliced: true,selected: true},['民生 100',8.5],['淘宝 400',6.2],['邮乐 263',0.5],['一卡通 253',0.2]]);
+        //设置发货订单数据
+        chart_order_send.series[0].setData([['建行 500',   40.0],['招商 200',31.8],{name: '善融 362',y: 12.8,sliced: true,selected: true},['民生 100',8.5],['淘宝 400',6.2],['邮乐 263',0.5],['一卡通 253',0.2]]);
+        //设置退货订单数据
+
+
+    })
+
+
+
+</script>
+
+<!--按钮插件-->
+<script type="text/javascript" src="common/plugin/ladda/spin.min.js"></script>
+<script type="text/javascript" src="common/plugin/ladda/ladda.min.js"></script>
+<script type="text/javascript">
+    Ladda.bind( 'button[type=submit]',{ timeout: 2000 } );
+</script>
+</html>

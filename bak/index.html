@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>boostrap</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <!--<link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.css" rel="stylesheet">-->
+    <!--<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>-->
+    <!--<script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.js"></script>-->
+    <link href="style/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <script src="style/bootstrap/js/jquery.min.js"></script>
+    <script src="style/bootstrap/js/bootstrap.js"></script>
+    <style type="text/css">
+        .container {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+
+    <ul class="nav nav-tabs" id="myTab">
+        <li class="active"><a href="#home">Home</a></li>
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#messages">Messages</a></li>
+        <li><a href="#settings">Settings</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="home">home</div>
+        <div class="tab-pane" id="profile"></div>
+        <div class="tab-pane" id="messages">
+
+
+        </div>
+        <div class="tab-pane" id="settings">
+
+
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#myTab a:last').tab('show');//初始化显示哪个tab 
+
+        $('#myTab a').click(function (e) {
+
+            e.preventDefault();//阻止a链
+            $(this).tab('show');//显示当前选中的链接及关联的content
+        })
+
+        /*		$('#myTab a').on('shown.bs.tab', function (e) {
+         e.target // newly activated tab
+         alert('adsf');
+         console.info(e);
+         e.relatedTarget // previous active tab
+         })*/
+
+
+        $('#myTab a').on('shown.bs.tab', function (e) {
+            var target = $(e.target).attr("href") // activated tab
+            console.info(target);
+//		      实现ajax
+            if ($(target).is(':empty')) {
+                $.ajax({
+                    type: "post",
+                    url: "./index.html",
+                    error: function (data) {
+                        alert("There was a problem");
+                    },
+                    success: function (data) {
+                        $(target).html(data);
+                    }
+                })
+            }
+        })
+    })
+
+
+</script>
+
+
+</body>
+</html>
