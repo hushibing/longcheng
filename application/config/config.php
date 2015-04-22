@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://www.order_system.com';
+$config['base_url']	= 'http://localhost:9000';
 
 /*
 |--------------------------------------------------------------------------
