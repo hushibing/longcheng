@@ -17,4 +17,9 @@ class Homeindex extends CI_Controller{
         $this->load->view("home/home_view");
     }
 
+    public function tables()
+    {
+        $this->load->view("home/home_index_view");
+    }
+
 }

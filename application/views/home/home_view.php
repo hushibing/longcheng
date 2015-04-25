@@ -44,7 +44,6 @@
                         </a>
                     </h4>
                 </div>
-
                 <div id="collapse_base" class="panel-collapse collapse in">
                     <div class="panel-body">
 
@@ -122,7 +121,6 @@
 
                     </div>
                 </div>
-
             </div><!-- panel ¡ª¡ªinvest -->
 
             <div class="panel panel-info">
@@ -176,7 +174,6 @@
 
                         </div>
 
-
                     </div>
 
                 </div>
@@ -185,7 +182,6 @@
 
         </div><!--panel group -->
 
-
     </form>
     <div class="form-group">
         <div class="col-sm-6">
@@ -193,12 +189,6 @@
             <button class="btn btn-white" type="button">È¡Ïû</button>
         </div>
     </div>
-
-
-
-
-
-
 
 </div>
 
